@@ -1,4 +1,4 @@
-name: Daily Data Ingestion
+name: Daily Data Ingestion (09:15 IST)
 
 on:
   schedule:
