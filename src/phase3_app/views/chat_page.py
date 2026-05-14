@@ -29,13 +29,19 @@ def render_assistant(content, sources=None, ts=None):
     if sources:
         cards = ""
         for i, s in enumerate(sources):
-            name = s.replace("_", " ").replace(".txt", "").title()
+            if isinstance(s, dict):
+                name = str(s.get("name", "Unknown")).replace("_", " ").replace(".txt", "").title()
+                url = s.get("url") or f"https://groww.in/search?q={name.replace(' ', '+')}"
+            else:
+                name = str(s).replace("_", " ").replace(".txt", "").title()
+                url = f"https://groww.in/search?q={name.replace(' ', '+')}"
+                
             cards += (
-                f'<div class="src-card">'
+                f'<a href="{url}" target="_blank" class="src-card">'
                 f'<div class="src-label">Source {i+1}</div>'
                 f'<div class="src-name">{name}</div>'
                 f'<div class="src-link">Open Source ↗</div>'
-                f'</div>'
+                f'</a>'
             )
         src_html = f'<div class="src-grid">{cards}</div>'
 
@@ -126,9 +132,15 @@ def render(avatar_b64):
                 else:
                     raw = st.session_state.groq_client.generate_answer(last_q, docs)
                     ans = raw.split("Source:")[0].strip()
-                    sources = list(set(
-                        [d.metadata.get("source", "doc").split("/")[-1] for d in docs]
-                    ))[:2]
+                    
+                    src_map = {}
+                    for d in docs:
+                        s_url = d.metadata.get("source_url")
+                        s_name = d.metadata.get("scheme_name") or d.metadata.get("source", "doc").split("/")[-1]
+                        if s_name not in src_map:
+                            src_map[s_name] = s_url
+                            
+                    sources = [{"name": n, "url": u} for n, u in src_map.items()][:2]
             st.session_state.messages.append({
                 "role": "assistant", "content": ans,
                 "sources": sources, "ts": ts
