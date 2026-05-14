@@ -16,7 +16,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../'
 
 from src.phase1_ingestion.vector_store import VectorStoreManager
 from src.phase2_rag.groq_client import GroqRAGClient
-from src.phase3_app.pages import chat_page, faq_page, insights_page, about_page
+from src.phase3_app.views import chat_page, faq_page, insights_page, about_page
 
 # ── Page Config ──
 st.set_page_config(
@@ -62,6 +62,10 @@ st.markdown(f"""
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 .stApp {{ background:#0b0c10 !important; font-family:'Outfit',sans-serif; color:#e2e8f0; }}
 [data-testid="stHeader"] {{ display:none !important; }}
+[data-testid="stSidebarNav"] {{ display:none !important; }}
+[data-testid="stSidebarNavItems"] {{ display:none !important; }}
+ul[data-testid="stSidebarNavItems"] {{ display:none !important; }}
+[data-testid="stSidebar"] [data-testid="stSidebarNav"] {{ display:none !important; max-height:0 !important; overflow:hidden !important; }}
 [data-testid="stSidebar"] {{ background:#0d0e14 !important; border-right:1px solid rgba(139,92,246,0.12); }}
 [data-testid="stSidebar"] > div:first-child {{ padding-top:0 !important; }}
 .block-container {{ padding:0 !important; max-width:100% !important; }}
