@@ -99,23 +99,23 @@ ul[data-testid="stSidebarNavItems"] {{ display:none !important; }}
 .status-dot {{ color:#22c55e; margin-right:4px; }}
 
 /* ── Chat Layout ── */
-.chat-wrap {{ max-width:720px; margin:0 auto; padding:28px 16px 120px; }}
+.chat-wrap {{ max-width:800px; margin:0 auto; padding:28px 16px 120px; }}
 
 /* ── User Bubble ── */
 .user-row {{ display:flex; justify-content:flex-end; gap:10px; margin-bottom:22px; }}
-.user-bubble {{ background:linear-gradient(135deg,rgba(139,92,246,0.18),rgba(99,102,241,0.12)); border:1px solid rgba(139,92,246,0.2); border-radius:16px 16px 4px 16px; padding:12px 18px; font-size:0.92rem; line-height:1.65; color:#e2e8f0; max-width:45%; box-shadow:0 2px 12px rgba(139,92,246,0.08); }}
+.user-bubble {{ background:linear-gradient(135deg,rgba(139,92,246,0.15),rgba(99,102,241,0.10)); border:1px solid rgba(139,92,246,0.2); border-radius:16px 16px 4px 16px; padding:12px 18px; font-size:0.95rem; line-height:1.6; color:#e2e8f0; width:fit-content; min-width:180px; max-width:85%; box-shadow:0 2px 8px rgba(139,92,246,0.05); }}
 .user-time {{ font-family:'JetBrains Mono'; font-size:0.55rem; color:#475569; margin-top:4px; text-align:right; }}
 
 /* ── AI Bubble ── */
 .ai-row {{ display:flex; align-items:flex-start; gap:10px; margin-bottom:22px; }}
 .ai-avatar {{ width:32px; height:32px; border-radius:8px; background:linear-gradient(135deg,#8b5cf6,#06b6d4); display:flex; align-items:center; justify-content:center; font-size:0.85rem; flex-shrink:0; margin-top:2px; }}
-.ai-bubble {{ background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06); border-radius:4px 16px 16px 16px; padding:14px 18px; font-size:0.92rem; line-height:1.75; color:#cbd5e1; max-width:70%; backdrop-filter:blur(4px); }}
+.ai-bubble {{ background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06); border-radius:4px 16px 16px 16px; padding:14px 18px; font-size:0.95rem; line-height:1.6; color:#e2e8f0; width:fit-content; min-width:180px; max-width:85%; }}
 .ai-meta {{ display:flex; gap:6px; margin-top:6px; align-items:center; flex-wrap:wrap; }}
 .ai-pill {{ background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.05); padding:2px 8px; border-radius:4px; font-family:'JetBrains Mono'; font-size:0.55rem; color:#475569; text-transform:uppercase; }}
 .ai-time {{ font-family:'JetBrains Mono'; font-size:0.55rem; color:#475569; }}
 
 /* ── Source Cards ── */
-.src-grid {{ display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:10px; max-width:70%; }}
+.src-grid {{ display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:10px; max-width:85%; }}
 .src-card {{ background:rgba(255,255,255,0.015); border:1px solid rgba(255,255,255,0.04); border-radius:8px; padding:10px 12px; cursor:pointer; transition:all 0.2s ease; text-decoration:none; display:block; }}
 .src-card:hover {{ border-color:rgba(139,92,246,0.25); background:rgba(139,92,246,0.04); transform:translateY(-1px); }}
 .src-label {{ font-family:'JetBrains Mono'; font-size:0.52rem; color:#475569; margin-bottom:3px; text-transform:uppercase; }}
@@ -124,7 +124,7 @@ ul[data-testid="stSidebarNavItems"] {{ display:none !important; }}
 
 /* ── Loading Animation ── */
 .loading-row {{ display:flex; align-items:flex-start; gap:10px; margin-bottom:22px; }}
-.loading-bubble {{ background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06); border-radius:4px 16px 16px 16px; padding:12px 18px; max-width:70%; }}
+.loading-bubble {{ background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06); border-radius:4px 16px 16px 16px; padding:12px 18px; max-width:85%; }}
 .loading-text {{ font-size:0.78rem; color:#64748b; font-family:'JetBrains Mono'; margin-bottom:6px; }}
 .loading-dots {{ display:flex; gap:4px; }}
 .loading-dot {{ width:6px; height:6px; border-radius:50%; background:#8b5cf6; animation:ldpulse 1.2s infinite; }}
@@ -145,7 +145,7 @@ ul[data-testid="stSidebarNavItems"] {{ display:none !important; }}
 /* ── Responsive ── */
 @media (max-width:768px) {{
     .chat-wrap {{ padding:16px 10px 100px; }}
-    .user-bubble {{ max-width:75%; }}
+    .user-bubble {{ max-width:90%; }}
     .ai-bubble {{ max-width:90%; }}
     .src-grid {{ grid-template-columns:1fr; max-width:90%; }}
     .top-header {{ padding:12px 16px; }}
