@@ -29,6 +29,13 @@ graph TD
         L --> M[Response + Citation Badge]
         G1 --> M
     end
+
+    subgraph Phase 4: Deployment
+        N[GitHub Repository] --> O[Streamlit Cloud]
+        P[GitHub Actions] --> Q[Automated Data Refresh]
+        E --> R[Vector DB Setup]
+        R --> O
+    end
 ```
 
 ## 2. Phase 1 Data Sources (ICICI Prudential via Groww)
@@ -196,7 +203,104 @@ Phase 2 is broken into 4 subphases. Each subphase is self-contained and should b
 
 ---
 
-## 4. Updated Technical Stack
+## 5. Phase 4: Deployment (Streamlit Community Cloud)
+
+*Objective: Deploy the MVP to Streamlit Community Cloud for public access.*
+
+### Subphase 4A: Deployment Preparation
+*Objective: Prepare all necessary files and configurations for Streamlit Cloud deployment.*
+
+| Step | Description | File |
+|------|-------------|------|
+| 4A.1 | Prepare `requirements.txt` with all necessary dependencies (streamlit, groq, chromadb, langchain, etc.) | `requirements.txt` |
+| 4A.2 | Create `.streamlit/config.toml` for app theme and server configuration | `.streamlit/config.toml` |
+| 4A.3 | Ensure `.gitignore` excludes sensitive files (secrets.toml, .env, venv/, chromadb_store/) | `.gitignore` |
+| 4A.4 | Verify all source files are committed to the repository | Git |
+
+**Acceptance Criteria:**
+- `requirements.txt` contains all dependencies without version conflicts
+- `.streamlit/config.toml` is properly configured for the app theme
+- Sensitive files are excluded from Git
+- Repository is clean and ready for deployment
+
+---
+
+### Subphase 4B: Vector Database Setup
+*Objective: Configure persistent vector storage for production deployment.*
+
+| Step | Description | File |
+|------|-------------|------|
+| 4B.1 | Choose vector database option: Local ChromaDB (for testing) or Cloud (Pinecone/Qdrant for production) | Decision |
+| 4B.2 | For local ChromaDB: Run ingestion locally and commit `chromadb_store/` to repository | `chromadb_store/` |
+| 4B.3 | For cloud option: Sign up for Pinecone/Qdrant free tier and update code to use cloud credentials | `src/phase1_ingestion/vector_store.py` |
+| 4B.4 | Run ingestion pipeline to populate vector database with latest data | `run_ingestion.py` |
+| 4B.5 | Verify vector database is accessible and contains expected data | Manual test |
+
+**Acceptance Criteria:**
+- Vector database is populated with all 24 scraped sources
+- Retrieval queries return relevant results
+- Database persistence is confirmed (survives restarts)
+
+---
+
+### Subphase 4C: Streamlit Cloud Deployment
+*Objective: Deploy the application to Streamlit Community Cloud.*
+
+| Step | Description | File |
+|------|-------------|------|
+| 4C.1 | Go to [share.streamlit.io](https://share.streamlit.io) and sign in with GitHub | Streamlit Dashboard |
+| 4C.2 | Click "New app" and select repository: `indubhaskar25/RAG-Based-Mutual-Fund-FAQ-Chatbot` | Streamlit Dashboard |
+| 4C.3 | Select branch: `main` and main file path: `src/phase3_app/streamlit_app.py` | Streamlit Dashboard |
+| 4C.4 | Configure `GROQ_API_KEY` as a secret in Streamlit Cloud advanced settings | Streamlit Dashboard |
+| 4C.5 | If using cloud vector DB, add `PINECONE_API_KEY` or `QDRANT_API_KEY` as secrets | Streamlit Dashboard |
+| 4C.6 | Click "Deploy" and wait for deployment to complete (2-3 minutes) | Streamlit Dashboard |
+| 4C.7 | Test the deployed app with sample queries to verify functionality | Browser |
+
+**Acceptance Criteria:**
+- App deploys successfully without errors
+- App is accessible at the provided Streamlit Cloud URL
+- Sample queries return correct answers with citations
+- Error handling works as expected
+
+---
+
+### Subphase 4D: GitHub Actions Automation (Optional)
+*Objective: Set up automated data refresh using GitHub Actions.*
+
+| Step | Description | File |
+|------|-------------|------|
+| 4D.1 | Verify `.github/workflows/ingest_data.yml` exists and is properly configured | `.github/workflows/ingest_data.yml` |
+| 4D.2 | Configure workflow schedule (e.g., daily at 00:00 UTC) | `.github/workflows/ingest_data.yml` |
+| 4D.3 | Add required secrets to GitHub repository settings (GROQ_API_KEY) | GitHub Settings |
+| 4D.4 | Test workflow manually from GitHub Actions tab | GitHub Actions |
+| 4D.5 | Monitor workflow execution and verify data updates | GitHub Actions |
+
+**Acceptance Criteria:**
+- GitHub Actions workflow runs successfully
+- Updated data is committed and pushed to repository
+- Workflow runs on schedule without manual intervention
+
+---
+
+### Subphase 4E: Monitoring and Maintenance
+*Objective: Set up monitoring and maintenance procedures for the deployed app.*
+
+| Step | Description | File |
+|------|-------------|------|
+| 4E.1 | Set up Streamlit Cloud monitoring for app uptime and performance | Streamlit Dashboard |
+| 4E.2 | Configure error logging and alerts for API failures | Code |
+| 4E.3 | Document maintenance procedures and rollback plan | Documentation |
+| 4E.4 | Set up regular review of API usage and costs | Manual |
+| 4E.5 | Create backup strategy for vector database data | Documentation |
+
+**Acceptance Criteria:**
+- Monitoring is active and alerts are configured
+- Maintenance procedures are documented
+- Backup strategy is in place for data recovery
+
+---
+
+## 6. Updated Technical Stack
 *   **Frontend & Deployment:** Streamlit (supports local & Streamlit Community Cloud)
 *   **LLM Provider:** Groq
 *   **Recommended Model:** `llama-3.1-8b-instant` (fast, capable of strict instruction following)
@@ -204,7 +308,7 @@ Phase 2 is broken into 4 subphases. Each subphase is self-contained and should b
 *   **Vector Database:** ChromaDB (persistent local storage for Streamlit deployments)
 *   **PDF Parsing:** `PyMuPDF` and `pdfplumber`
 
-## 5. Execution Flow
+## 7. Execution Flow
 1. **User Input**: User submits a question via the Streamlit UI.
 2. **Query Safety Guardrail**: Evaluates the question to detect advisory intent (e.g., "Should I invest?", "Best fund?").
 3. **Retrieval**: If factual, performs standard similarity search via ChromaDB (top 3 chunks).
@@ -213,7 +317,7 @@ Phase 2 is broken into 4 subphases. Each subphase is self-contained and should b
 6. **Response Rendering**: Streamlit renders the LLM answer alongside a clickable citation badge.
 ---
 
-## 4. Automated Data Refresh (GitHub Actions)
+## 8. Automated Data Refresh (GitHub Actions)
 
 To ensure the chatbot provides the latest mutual fund data (NAVs, expense ratios, etc.), the ingestion pipeline is automated using GitHub Actions.
 

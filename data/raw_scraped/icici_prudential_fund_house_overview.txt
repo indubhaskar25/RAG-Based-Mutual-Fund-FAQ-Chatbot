@@ -72,73 +72,73 @@ Rating
 Risk
 ICICI Prudential Silver ETF FoF Direct-Growth
 Commodities Silver
-+166.29%
-+51.77%
++182.81%
++54.95%
 --
 --
 Very High
 ICICI Prudential Large Cap Fund
 Equity Large Cap
--2.84%
-+14.71%
+-1.89%
++14.72%
 +14.6%
 5
 Very High
 ICICI Prudential BHARAT 22 FOF Direct-Growth
 Equity Large Cap
-+10.99%
-+23.95%
-+25.85%
++12.51%
++24.23%
++26.02%
 5
 Very High
 ICICI Prudential Multi Asset Fund
 Hybrid Multi Asset Allocation
-+10.51%
-+17.98%
-+18.6%
++7.6%
++17.61%
++18.46%
 5
 Very High
 ICICI Prudential Technology Direct Plan-Growth
 Equity Sectoral
--8.15%
-+10.28%
-+9.83%
+-15.49%
++9.23%
++9.34%
 --
-Very High
-ICICI Prudential Gold ETF FoF Direct-Growth
-Commodities Gold
-+53.48%
-+33.85%
-+24.64%
-3
-High
-ICICI Prudential Nifty Next 50 Index Direct-Growth
-Equity Large Cap
-+6.02%
-+19.25%
-+13.98%
-4
 Very High
 ICICI Prudential Large & Mid Cap Fund
 Equity Large & MidCap
-+1.71%
-+19.04%
-+19.11%
++2.5%
++19.06%
++19.12%
 5
 Very High
+ICICI Prudential Nifty Next 50 Index Direct-Growth
+Equity Large Cap
++6.92%
++19.57%
++14.17%
+4
+Very High
+ICICI Prudential Gold ETF FoF Direct-Growth
+Commodities Gold
++67.02%
++36.38%
++26.06%
+3
+High
 ICICI Prudential Pharma Healthcare and Diagnostics (P.H.D) Fund
 Equity Sectoral
-+11.9%
-+28.74%
-+16.8%
++10.73%
++28.8%
++16.84%
 5
 Very High
-ICICI Prudential Infrastructure Direct-Growth
-Equity Sectoral
-+6.34%
-+23.48%
-+25.42%
-5
+ICICI Prudential Commodities Fund
+Equity Thematic
++21.12%
++21.42%
++18.03%
+--
 Very High
 Home
 >

@@ -6,7 +6,10 @@ Ensures every chunk carries source_url for mandatory citation.
 
 import uuid
 from typing import Dict, Any, List
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+try:
+    from langchain.text_splitter import RecursiveCharacterTextSplitter
+except ImportError:
+    from langchain_text_splitters import RecursiveCharacterTextSplitter
 import logging
 
 logging.basicConfig(level=logging.INFO)

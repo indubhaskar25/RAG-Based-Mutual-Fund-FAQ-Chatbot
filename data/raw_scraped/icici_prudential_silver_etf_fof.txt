@@ -52,10 +52,10 @@ Estimate balance needed to buy/sell a stock
 SWP calculator
 Returns on your systematic withdrawal plan
 Brokerage and charges on Groww
-+51.77
++54.95
 %
 3Y annualised
-+4.56
++6.56
 %
 1D
 1M
@@ -63,14 +63,14 @@ Brokerage and charges on Groww
 1Y
 3Y
 All
-NAV: 12 May '26
-₹40.39
+NAV: 13 May '26
+₹43.04
 Min. for SIP
 ₹100
 Fund size (AUM)
 ₹6,276.93 Cr
 Expense ratio
-0.21%
+0.22%
 Rating
 --
 Return calculator
@@ -83,27 +83,27 @@ Historic returns
 Returns
 3 months
 ₹15,000
-₹15,527
+₹16,268
 +
-3.51
+8.45
 %
 6 months
 ₹30,000
-₹34,209
+₹36,138
 +
-14.03
+20.46
 %
 1 year
 ₹60,000
-₹97,598
+₹1,03,396
 +
-62.66
+72.33
 %
 3 years
 ₹1,80,000
-₹4,71,768
+₹5,01,404
 +
-162.09
+178.56
 %
 Holdings (
 1
@@ -137,10 +137,10 @@ Name
 3Y
 All
 Fund returns
-+67.6%
-+166.3%
-+51.8%
-+38.6%
++70.7%
++182.8%
++55.0%
++40.6%
 Category average (
 Commodities Silver
 )
@@ -152,8 +152,8 @@ Rank (
 Commodities Silver
 )
 --
-4
-4
+9
+2
 --
 Understand terms
 Expense ratio
@@ -323,7 +323,7 @@ ICICI Prudential Passive Multi Asset FoF Direct Growth
 ICICI Prudential Silver ETF FoF Direct Growth
 About
 ICICI Prudential Silver ETF FoF Direct Growth
-ICICI Prudential Silver ETF FoF Direct Growth is a Commodities Mutual Fund Scheme launched by ICICI Prudential Mutual Fund. This scheme was made available to investors on 12 Oct 1993. Ashwini Jemin Bharucha is the Current Fund Manager of ICICI Prudential Silver ETF FoF Direct Growth fund. The fund currently has an Asset Under Management(AUM) of ₹11,12,891 Cr and the Latest NAV as of 12 May 2026 is ₹40.39.
+ICICI Prudential Silver ETF FoF Direct Growth is a Commodities Mutual Fund Scheme launched by ICICI Prudential Mutual Fund. This scheme was made available to investors on 12 Oct 1993. Ashwini Jemin Bharucha is the Current Fund Manager of ICICI Prudential Silver ETF FoF Direct Growth fund. The fund currently has an Asset Under Management(AUM) of ₹11,12,891 Cr and the Latest NAV as of 13 May 2026 is ₹43.04.
 The ICICI Prudential Silver ETF FoF Direct Growth is rated Very High risk. Minimum SIP Investment is set to ₹100. Minimum Lumpsum Investment is ₹100. Exit load of 1% If redeemed within 15 days.
 ;
 Investment Objective

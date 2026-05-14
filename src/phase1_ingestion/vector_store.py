@@ -49,8 +49,12 @@ class VectorStoreManager:
         """Automatically index source documents."""
         data_path = "data/raw_scraped"
         if not os.path.exists(data_path): return
-            
-        from langchain.docstore.document import Document
+
+        try:
+            from langchain_core.documents import Document
+        except ImportError:
+            from langchain.docstore.document import Document
+
         documents = []
         for file_name in os.listdir(data_path):
             if file_name.endswith(".txt"):
@@ -60,7 +64,7 @@ class VectorStoreManager:
                     chunks = [text[i:i+1000] for i in range(0, len(text), 800)]
                     for i, chunk in enumerate(chunks):
                         documents.append(Document(page_content=chunk, metadata={"source": file_name}))
-        
+
         if documents:
             self.vector_store.add_documents(documents)
 
@@ -71,7 +75,11 @@ class VectorStoreManager:
 
     def add_chunks(self, chunks: List[Dict]):
         """Converts raw chunk dicts from chunker.py into Document objects and adds them."""
-        from langchain.docstore.document import Document
+        try:
+            from langchain_core.documents import Document
+        except ImportError:
+            from langchain.docstore.document import Document
+
         docs = []
         for c in chunks:
             docs.append(Document(

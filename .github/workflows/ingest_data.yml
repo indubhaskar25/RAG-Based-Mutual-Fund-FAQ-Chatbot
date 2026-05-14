@@ -30,6 +30,7 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add chromadb_store/ data/raw_scraped/
+          git add -f chromadb_store/ 
+          git add data/raw_scraped/
           git commit -m "Automated data refresh: $(date +'%Y-%m-%d')" || echo "No changes to commit"
           git push

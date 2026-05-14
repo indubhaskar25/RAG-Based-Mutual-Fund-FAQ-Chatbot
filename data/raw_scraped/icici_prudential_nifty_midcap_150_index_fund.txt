@@ -52,10 +52,10 @@ Estimate balance needed to buy/sell a stock
 SWP calculator
 Returns on your systematic withdrawal plan
 Brokerage and charges on Groww
-+21.78
++22.02
 %
 3Y annualised
--2.52
++0.63
 %
 1D
 1M
@@ -63,14 +63,14 @@ Brokerage and charges on Groww
 1Y
 3Y
 All
-NAV: 12 May '26
-₹19.61
+NAV: 13 May '26
+₹19.74
 Min. for SIP
 ₹100
 Fund size (AUM)
 ₹1,036.02 Cr
 Expense ratio
-0.25%
+0.34%
 Rating
 3
 Return calculator
@@ -83,27 +83,27 @@ Historic returns
 Returns
 3 months
 ₹15,000
-₹15,448
+₹15,510
 +
-2.99
+3.40
 %
 6 months
 ₹30,000
-₹30,521
+₹30,685
 +
-1.74
+2.28
 %
 1 year
 ₹60,000
-₹61,257
+₹61,614
 +
-2.10
+2.69
 %
 3 years
 ₹1,80,000
-₹2,09,863
+₹2,11,106
 +
-16.59
+17.28
 %
 Holdings (
 150
@@ -734,10 +734,10 @@ Name
 3Y
 All
 Fund returns
--1.9%
-+8.3%
-+21.8%
-+16.6%
+-0.9%
++8.8%
++22.0%
++16.7%
 Category average (
 Equity Mid Cap
 )
@@ -749,7 +749,7 @@ Rank (
 Equity Mid Cap
 )
 --
-23
+24
 20
 --
 Understand terms
@@ -779,24 +779,24 @@ Name
 3Y
 Fund Size(Cr)
 WhiteOak Capital Mid Cap Fund Direct Growth
-+14.05%
-+26.92%
++14.28%
++27.05%
 5,293.04
 Edelweiss Mid Cap Direct Plan Growth
-+9.86%
-+25.56%
++10.01%
++25.74%
 15,910.69
 Nippon India Growth Mid Cap Fund Direct Growth
-+10.77%
-+25.15%
++10.94%
++25.29%
 45,820.33
 Sundaram Mid Cap Fund Direct Growth
-+9.93%
++9.71%
 +23.99%
 13,378.01
 HDFC Mid Cap Fund Direct Growth
-+8.60%
-+23.44%
++8.35%
++23.43%
 94,744.72
 Compare
 Fund management
@@ -959,7 +959,7 @@ ICICI Prudential BSE 500 ETF FOF Direct Growth
 ICICI Prudential Nifty Midcap 150 Index Fund Direct Growth
 About
 ICICI Prudential Nifty Midcap 150 Index Fund Direct Growth
-ICICI Prudential Nifty Midcap 150 Index Fund Direct Growth is a Equity Mutual Fund Scheme launched by ICICI Prudential Mutual Fund. This scheme was made available to investors on 12 Oct 1993. Ajay Kumar Solanki is the Current Fund Manager of ICICI Prudential Nifty Midcap 150 Index Fund Direct Growth fund. The fund currently has an Asset Under Management(AUM) of ₹11,12,891 Cr and the Latest NAV as of 12 May 2026 is ₹19.61.
+ICICI Prudential Nifty Midcap 150 Index Fund Direct Growth is a Equity Mutual Fund Scheme launched by ICICI Prudential Mutual Fund. This scheme was made available to investors on 12 Oct 1993. Ajay Kumar Solanki is the Current Fund Manager of ICICI Prudential Nifty Midcap 150 Index Fund Direct Growth fund. The fund currently has an Asset Under Management(AUM) of ₹11,12,891 Cr and the Latest NAV as of 13 May 2026 is ₹19.74.
 The ICICI Prudential Nifty Midcap 150 Index Fund Direct Growth is rated Very High risk. Minimum SIP Investment is set to ₹100. Minimum Lumpsum Investment is ₹100.
 ;
 Investment Objective

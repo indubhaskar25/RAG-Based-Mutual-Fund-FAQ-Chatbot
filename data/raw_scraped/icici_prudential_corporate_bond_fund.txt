@@ -52,10 +52,10 @@ Estimate balance needed to buy/sell a stock
 SWP calculator
 Returns on your systematic withdrawal plan
 Brokerage and charges on Groww
-+7.47
++7.46
 %
 3Y annualised
--0.06
+0.00
 %
 1D
 1M
@@ -64,7 +64,7 @@ Brokerage and charges on Groww
 3Y
 5Y
 All
-NAV: 12 May '26
+NAV: 13 May '26
 ₹32.71
 Min. for SIP
 ₹100
@@ -84,27 +84,27 @@ Historic returns
 Returns
 1 year
 ₹60,000
-₹61,258
+₹61,253
 +
-2.10
+2.09
 %
 3 years
 ₹1,80,000
-₹1,99,009
+₹1,98,980
 +
-10.56
+10.54
 %
 5 years
 ₹3,00,000
-₹3,57,037
+₹3,56,984
 +
-19.01
+18.99
 %
 10 years
 ₹6,00,000
-₹8,66,790
+₹8,66,659
 +
-44.46
+44.44
 %
 Holdings (
 208
@@ -1022,24 +1022,24 @@ Name
 3Y
 Fund Size(Cr)
 Franklin India Corporate Debt Fund Direct Growth
-+6.52%
++6.20%
 +7.92%
 1,283.40
 ICICI Prudential Corporate Bond Fund Direct Plan Growth
-+5.64%
-+7.47%
++5.41%
++7.46%
 32,682.46
 Nippon India Corporate Bond Fund Direct Growth
-+5.11%
-+7.44%
++4.74%
++7.43%
 8,245.51
 Kotak Corporate Bond Fund Direct Growth
-+5.16%
++4.84%
 +7.33%
 16,877.17
 Bandhan Corporate Bond Fund Direct Growth
-+5.38%
-+7.24%
++5.06%
++7.22%
 13,499.01
 Compare
 Fund management
@@ -1103,7 +1103,7 @@ ICICI Prudential Global Stable Equity Fund (FOF) Direct Growth
 ICICI Prudential Passive Multi Asset FoF Direct Growth
 About
 ICICI Prudential Corporate Bond Fund Direct Plan Growth
-ICICI Prudential Corporate Bond Fund Direct Plan Growth is a Debt Mutual Fund Scheme launched by ICICI Prudential Mutual Fund. This scheme was made available to investors on 12 Oct 1993. Manish Banthia is the Current Fund Manager of ICICI Prudential Corporate Bond Fund Direct Plan Growth fund. The fund currently has an Asset Under Management(AUM) of ₹11,12,891 Cr and the Latest NAV as of 12 May 2026 is ₹32.71.
+ICICI Prudential Corporate Bond Fund Direct Plan Growth is a Debt Mutual Fund Scheme launched by ICICI Prudential Mutual Fund. This scheme was made available to investors on 12 Oct 1993. Manish Banthia is the Current Fund Manager of ICICI Prudential Corporate Bond Fund Direct Plan Growth fund. The fund currently has an Asset Under Management(AUM) of ₹11,12,891 Cr and the Latest NAV as of 13 May 2026 is ₹32.71.
 The ICICI Prudential Corporate Bond Fund Direct Plan Growth is rated Moderate risk. Minimum SIP Investment is set to ₹100. Minimum Lumpsum Investment is ₹100.
 ;
 Investment Objective
