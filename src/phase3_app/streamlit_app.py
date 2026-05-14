@@ -56,81 +56,101 @@ def _load_avatar():
 
 AVATAR_B64 = _load_avatar()
 
-# ── CSS ──
+# ── Global CSS ──
 st.markdown(f"""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
-.stApp {{ background:#0b0c10 !important; font-family:'Outfit',sans-serif; color:#e2e8f0; }}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ── Reset & Base ── */
+.stApp {{ background:#0a0b0f !important; font-family:'Inter',sans-serif; color:#e2e8f0; }}
 [data-testid="stHeader"] {{ display:none !important; }}
 [data-testid="stSidebarNav"] {{ display:none !important; }}
 [data-testid="stSidebarNavItems"] {{ display:none !important; }}
 ul[data-testid="stSidebarNavItems"] {{ display:none !important; }}
 [data-testid="stSidebar"] [data-testid="stSidebarNav"] {{ display:none !important; max-height:0 !important; overflow:hidden !important; }}
-[data-testid="stSidebar"] {{ background:#0d0e14 !important; border-right:1px solid rgba(139,92,246,0.12); }}
+[data-testid="stSidebar"] {{ background:#0c0d12 !important; border-right:1px solid rgba(139,92,246,0.08); }}
 [data-testid="stSidebar"] > div:first-child {{ padding-top:0 !important; }}
 .block-container {{ padding:0 !important; max-width:100% !important; }}
 
-/* Sidebar */
-.sb-brand {{ padding:28px 24px 12px; }}
-.sb-brand-title {{ font-size:1.35rem;font-weight:800;background:linear-gradient(135deg,#8b5cf6,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent; }}
-.sb-brand-sub {{ font-family:'JetBrains Mono';font-size:0.62rem;color:#475569;text-transform:uppercase;letter-spacing:2px;margin-top:4px; }}
-.sb-divider {{ height:1px;background:rgba(255,255,255,0.05);margin:12px 24px; }}
+/* ── Sidebar Branding ── */
+.sb-brand {{ padding:28px 20px 14px; }}
+.sb-brand-title {{ font-size:1.2rem; font-weight:800; background:linear-gradient(135deg,#8b5cf6,#06b6d4); -webkit-background-clip:text; -webkit-text-fill-color:transparent; letter-spacing:0.3px; }}
+.sb-brand-sub {{ font-family:'JetBrains Mono'; font-size:0.58rem; color:#475569; text-transform:uppercase; letter-spacing:1.5px; margin-top:3px; }}
+.sb-divider {{ height:1px; background:rgba(255,255,255,0.04); margin:10px 16px; }}
 
-/* AI Card */
-.ai-card {{ margin:16px 12px;padding:18px;background:linear-gradient(135deg,rgba(139,92,246,0.07),rgba(6,182,212,0.05));border:1px solid rgba(139,92,246,0.2);border-radius:14px; }}
-.ai-card-header {{ display:flex;align-items:center;gap:12px;margin-bottom:12px; }}
-.ai-card-avatar {{ width:46px;height:46px;border-radius:12px;background:url('data:image/png;base64,{AVATAR_B64}') center/cover;border:2px solid rgba(139,92,246,0.4);flex-shrink:0; }}
-.ai-card-name {{ font-size:0.92rem;font-weight:700;color:#e2e8f0; }}
-.ai-card-role {{ font-size:0.72rem;color:#8b5cf6;font-family:'JetBrains Mono'; }}
-.ai-badge {{ display:flex;align-items:center;gap:7px;padding:6px 10px;border-radius:8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);font-size:0.72rem;color:#94a3b8;margin-bottom:6px; }}
-.ai-badge-dot {{ width:7px;height:7px;border-radius:50%;flex-shrink:0; }}
-.dot-green {{ background:#22c55e;box-shadow:0 0 6px rgba(34,197,94,0.5); }}
-.dot-purple {{ background:#8b5cf6;box-shadow:0 0 6px rgba(139,92,246,0.5); }}
-.dot-teal {{ background:#06b6d4;box-shadow:0 0 6px rgba(6,182,212,0.5); }}
+/* ── AI Status Card ── */
+.ai-card {{ margin:12px 10px; padding:14px 16px; background:linear-gradient(135deg,rgba(139,92,246,0.05),rgba(6,182,212,0.03)); border:1px solid rgba(139,92,246,0.12); border-radius:12px; }}
+.ai-card-row {{ display:flex; align-items:center; gap:10px; margin-bottom:10px; }}
+.ai-card-icon {{ width:36px; height:36px; border-radius:10px; background:linear-gradient(135deg,#8b5cf6,#06b6d4); display:flex; align-items:center; justify-content:center; font-size:1rem; flex-shrink:0; }}
+.ai-card-name {{ font-size:0.85rem; font-weight:700; color:#e2e8f0; }}
+.ai-card-role {{ font-size:0.65rem; color:#64748b; font-family:'JetBrains Mono'; }}
+.ai-badge {{ display:flex; align-items:center; gap:6px; padding:5px 10px; border-radius:6px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.04); font-size:0.68rem; color:#64748b; margin-bottom:4px; }}
+.ai-badge-dot {{ width:6px; height:6px; border-radius:50%; flex-shrink:0; }}
+.dot-green {{ background:#22c55e; box-shadow:0 0 4px rgba(34,197,94,0.4); }}
+.dot-purple {{ background:#8b5cf6; box-shadow:0 0 4px rgba(139,92,246,0.4); }}
+.dot-teal {{ background:#06b6d4; box-shadow:0 0 4px rgba(6,182,212,0.4); }}
 
-/* Header */
-.top-header {{ display:flex;justify-content:space-between;align-items:center;padding:16px 36px;border-bottom:1px solid rgba(255,255,255,0.05);background:rgba(11,12,16,0.95);position:sticky;top:0;z-index:100;backdrop-filter:blur(8px); }}
-.header-brand {{ font-size:1.15rem;font-weight:800;background:linear-gradient(135deg,#8b5cf6,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent; }}
-.header-sep {{ color:rgba(255,255,255,0.1);font-size:1.1rem;margin:0 14px; }}
-.header-sub {{ font-family:'JetBrains Mono';font-size:0.68rem;color:#475569;letter-spacing:2px; }}
-.status-pill {{ background:rgba(6,182,212,0.08);border:1px solid rgba(6,182,212,0.25);padding:5px 14px;border-radius:20px;font-size:0.72rem;font-family:'JetBrains Mono';color:#e2e8f0; }}
-.status-dot {{ color:#22c55e;margin-right:5px; }}
+/* ── Top Header ── */
+.top-header {{ display:flex; justify-content:space-between; align-items:center; padding:14px 32px; border-bottom:1px solid rgba(255,255,255,0.04); background:rgba(10,11,15,0.96); position:sticky; top:0; z-index:100; backdrop-filter:blur(12px); }}
+.header-brand {{ font-size:1.05rem; font-weight:700; background:linear-gradient(135deg,#8b5cf6,#06b6d4); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }}
+.header-sep {{ color:rgba(255,255,255,0.08); font-size:1rem; margin:0 12px; }}
+.header-sub {{ font-family:'JetBrains Mono'; font-size:0.62rem; color:#475569; letter-spacing:1.5px; }}
+.status-pill {{ background:rgba(34,197,94,0.06); border:1px solid rgba(34,197,94,0.15); padding:4px 12px; border-radius:16px; font-size:0.65rem; font-family:'JetBrains Mono'; color:#94a3b8; }}
+.status-dot {{ color:#22c55e; margin-right:4px; }}
 
-/* Chat elements */
-.user-row {{ display:flex;justify-content:flex-end;align-items:flex-end;gap:12px;margin-bottom:28px;max-width:900px;margin-left:auto;margin-right:auto;padding:0 24px; }}
-.user-bubble {{ background:linear-gradient(135deg,rgba(139,92,246,0.15),rgba(6,182,212,0.08));border:1px solid rgba(139,92,246,0.25);border-radius:18px 18px 4px 18px;padding:14px 20px;font-size:0.97rem;line-height:1.6;color:#e2e8f0;max-width:75%; }}
-.user-avatar-pill {{ width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,#8b5cf6,#06b6d4);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0; }}
-.msg-time {{ font-family:'JetBrains Mono';font-size:0.6rem;color:#475569;margin-top:6px;text-align:right; }}
+/* ── Chat Layout ── */
+.chat-wrap {{ max-width:720px; margin:0 auto; padding:28px 16px 120px; }}
 
-.ai-row {{ display:flex;align-items:flex-start;gap:14px;margin-bottom:28px;max-width:900px;margin-left:auto;margin-right:auto;padding:0 24px; }}
-.ai-row-avatar {{ width:42px;height:42px;border-radius:12px;background-size:cover;background-position:center;border:1.5px solid rgba(139,92,246,0.35);flex-shrink:0;margin-top:2px; }}
-.ai-row-avatar-fallback {{ width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,#8b5cf6,#06b6d4);display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;margin-top:2px; }}
-.ai-bubble {{ background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.07);border-radius:4px 18px 18px 18px;padding:16px 22px;font-size:0.97rem;line-height:1.7;color:#e2e8f0; }}
-.ai-meta {{ display:flex;gap:8px;margin-top:8px;align-items:center; }}
-.ai-pill {{ background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);padding:3px 9px;border-radius:5px;font-family:'JetBrains Mono';font-size:0.6rem;color:#475569;text-transform:uppercase; }}
-.ai-time {{ font-family:'JetBrains Mono';font-size:0.6rem;color:#475569; }}
+/* ── User Bubble ── */
+.user-row {{ display:flex; justify-content:flex-end; gap:10px; margin-bottom:22px; }}
+.user-bubble {{ background:linear-gradient(135deg,rgba(139,92,246,0.18),rgba(99,102,241,0.12)); border:1px solid rgba(139,92,246,0.2); border-radius:16px 16px 4px 16px; padding:12px 18px; font-size:0.92rem; line-height:1.65; color:#e2e8f0; max-width:45%; box-shadow:0 2px 12px rgba(139,92,246,0.08); }}
+.user-time {{ font-family:'JetBrains Mono'; font-size:0.55rem; color:#475569; margin-top:4px; text-align:right; }}
 
-.src-grid {{ display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px; }}
-.src-card {{ background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:10px;padding:14px 16px; }}
-.src-label {{ font-family:'JetBrains Mono';font-size:0.58rem;color:#475569;margin-bottom:5px;text-transform:uppercase; }}
-.src-name {{ font-size:0.88rem;font-weight:600;color:#c4b5fd; }}
-.src-desc {{ font-size:0.78rem;color:#64748b;margin-top:4px;line-height:1.4; }}
+/* ── AI Bubble ── */
+.ai-row {{ display:flex; align-items:flex-start; gap:10px; margin-bottom:22px; }}
+.ai-avatar {{ width:32px; height:32px; border-radius:8px; background:linear-gradient(135deg,#8b5cf6,#06b6d4); display:flex; align-items:center; justify-content:center; font-size:0.85rem; flex-shrink:0; margin-top:2px; }}
+.ai-bubble {{ background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06); border-radius:4px 16px 16px 16px; padding:14px 18px; font-size:0.92rem; line-height:1.75; color:#cbd5e1; max-width:70%; backdrop-filter:blur(4px); }}
+.ai-meta {{ display:flex; gap:6px; margin-top:6px; align-items:center; flex-wrap:wrap; }}
+.ai-pill {{ background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.05); padding:2px 8px; border-radius:4px; font-family:'JetBrains Mono'; font-size:0.55rem; color:#475569; text-transform:uppercase; }}
+.ai-time {{ font-family:'JetBrains Mono'; font-size:0.55rem; color:#475569; }}
 
-.typing-row {{ display:flex;align-items:center;gap:14px;margin-bottom:20px;max-width:900px;margin-left:auto;margin-right:auto;padding:0 24px; }}
-.typing-bubble {{ background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.07);border-radius:4px 18px 18px 18px;padding:14px 20px; }}
-.typing-dots {{ display:flex;gap:5px; }}
-.typing-dot {{ width:7px;height:7px;border-radius:50%;background:#8b5cf6;opacity:0.4; }}
+/* ── Source Cards ── */
+.src-grid {{ display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:10px; max-width:70%; }}
+.src-card {{ background:rgba(255,255,255,0.015); border:1px solid rgba(255,255,255,0.04); border-radius:8px; padding:10px 12px; cursor:pointer; transition:all 0.2s ease; text-decoration:none; display:block; }}
+.src-card:hover {{ border-color:rgba(139,92,246,0.25); background:rgba(139,92,246,0.04); transform:translateY(-1px); }}
+.src-label {{ font-family:'JetBrains Mono'; font-size:0.52rem; color:#475569; margin-bottom:3px; text-transform:uppercase; }}
+.src-name {{ font-size:0.78rem; font-weight:600; color:#a78bfa; }}
+.src-link {{ font-size:0.6rem; color:#475569; margin-top:4px; font-family:'JetBrains Mono'; }}
 
-@keyframes pulse {{ 0%,100% {{ opacity:0.3; }} 50% {{ opacity:1; }} }}
+/* ── Loading Animation ── */
+.loading-row {{ display:flex; align-items:flex-start; gap:10px; margin-bottom:22px; }}
+.loading-bubble {{ background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06); border-radius:4px 16px 16px 16px; padding:12px 18px; max-width:70%; }}
+.loading-text {{ font-size:0.78rem; color:#64748b; font-family:'JetBrains Mono'; margin-bottom:6px; }}
+.loading-dots {{ display:flex; gap:4px; }}
+.loading-dot {{ width:6px; height:6px; border-radius:50%; background:#8b5cf6; animation:ldpulse 1.2s infinite; }}
+.loading-dot:nth-child(2) {{ animation-delay:0.2s; }}
+.loading-dot:nth-child(3) {{ animation-delay:0.4s; }}
+@keyframes ldpulse {{ 0%,80%,100% {{ opacity:0.2; transform:scale(0.8); }} 40% {{ opacity:1; transform:scale(1); }} }}
 
-/* Chat input */
-[data-testid="stChatInput"] {{ border:none !important;background:transparent !important; }}
-[data-testid="stChatInput"] > div {{ background:rgba(255,255,255,0.04) !important;border:1px solid rgba(139,92,246,0.25) !important;border-radius:16px !important;box-shadow:0 4px 24px rgba(0,0,0,0.3) !important; }}
-[data-testid="stChatInput"] textarea {{ color:#e2e8f0 !important; }}
+/* ── Chat Input ── */
+[data-testid="stChatInput"] {{ border:none !important; background:transparent !important; }}
+[data-testid="stChatInput"] > div {{ background:rgba(255,255,255,0.03) !important; border:1px solid rgba(139,92,246,0.15) !important; border-radius:14px !important; box-shadow:0 4px 20px rgba(0,0,0,0.25) !important; }}
+[data-testid="stChatInput"] textarea {{ color:#e2e8f0 !important; font-size:0.9rem !important; }}
 [data-testid="stChatInput"] textarea::placeholder {{ color:#475569 !important; }}
+[data-testid="stChatInput"] button {{ border-radius:10px !important; }}
 
-/* Expanders */
-.streamlit-expanderHeader {{ background:rgba(255,255,255,0.025) !important;border:1px solid rgba(255,255,255,0.07) !important;border-radius:10px !important;color:#e2e8f0 !important; }}
+/* ── Expanders ── */
+.streamlit-expanderHeader {{ background:rgba(255,255,255,0.02) !important; border:1px solid rgba(255,255,255,0.05) !important; border-radius:10px !important; color:#e2e8f0 !important; font-size:0.88rem !important; }}
+
+/* ── Responsive ── */
+@media (max-width:768px) {{
+    .chat-wrap {{ padding:16px 10px 100px; }}
+    .user-bubble {{ max-width:75%; }}
+    .ai-bubble {{ max-width:90%; }}
+    .src-grid {{ grid-template-columns:1fr; max-width:90%; }}
+    .top-header {{ padding:12px 16px; }}
+    .header-brand {{ font-size:0.9rem; }}
+}}
 </style>
 """, unsafe_allow_html=True)
 
@@ -150,11 +170,11 @@ def main():
             unsafe_allow_html=True
         )
 
-        # AI Card
+        # AI Status Card
         st.markdown(
             '<div class="ai-card">'
-            '<div class="ai-card-header">'
-            '<div class="ai-card-avatar"></div>'
+            '<div class="ai-card-row">'
+            '<div class="ai-card-icon">🤖</div>'
             '<div>'
             '<div class="ai-card-name">GROWW AI</div>'
             '<div class="ai-card-role">Fund Intelligence</div>'
@@ -169,22 +189,15 @@ def main():
         st.markdown('<div class="sb-divider"></div>', unsafe_allow_html=True)
 
         # Navigation buttons
-        nav_items = [
-            ("💬", "AI Conversation", "chat"),
-            ("❓", "FAQ", "faq"),
-            ("📈", "Fund Insights", "insights"),
-            ("ℹ️", "About", "about"),
-        ]
-        for icon, label, key in nav_items:
-            is_active = st.session_state.page == key
-            btn_type = "primary" if is_active else "secondary"
+        nav = [("💬", "AI Conversation", "chat"), ("❓", "FAQ", "faq"),
+               ("📊", "Fund Insights", "insights"), ("ℹ️", "About", "about")]
+        for icon, label, key in nav:
+            active = st.session_state.page == key
             st.button(
-                f"{icon}  {label}",
-                key=f"nav_{key}",
-                on_click=set_page,
-                args=(key,),
+                f"{icon}  {label}", key=f"nav_{key}",
+                on_click=set_page, args=(key,),
                 use_container_width=True,
-                type=btn_type
+                type="primary" if active else "secondary"
             )
 
         st.markdown('<div class="sb-divider"></div>', unsafe_allow_html=True)
@@ -195,24 +208,23 @@ def main():
                 st.rerun()
 
         st.markdown(
-            '<div style="padding:16px 12px;margin-top:12px;">'
-            '<div style="font-family:JetBrains Mono;font-size:0.6rem;color:#334155;'
+            '<div style="padding:14px 10px;margin-top:8px;">'
+            '<div style="font-family:JetBrains Mono;font-size:0.55rem;color:#334155;'
             'text-transform:uppercase;letter-spacing:1px;text-align:center;">'
-            'Powered by Groq · ChromaDB · LangChain</div></div>',
+            'Groq · ChromaDB · LangChain</div></div>',
             unsafe_allow_html=True
         )
 
     # ── HEADER ──
-    page_labels = {"chat": "AI Conversation", "faq": "FAQ", "insights": "Fund Insights", "about": "About"}
-    cur_label = page_labels.get(st.session_state.page, "AI Conversation")
+    labels = {"chat": "AI Conversation", "faq": "FAQ", "insights": "Fund Insights", "about": "About"}
     st.markdown(
         f'<div class="top-header">'
         f'<div style="display:flex;align-items:center;">'
         f'<div class="header-brand">GROWW RAG AI Chatbot</div>'
         f'<span class="header-sep">|</span>'
-        f'<div class="header-sub">{cur_label.upper()}</div>'
+        f'<div class="header-sub">{labels.get(st.session_state.page, "").upper()}</div>'
         f'</div>'
-        f'<div class="status-pill"><span class="status-dot">●</span>Live · ICICI Prudential</div>'
+        f'<div class="status-pill"><span class="status-dot">●</span> Live · ICICI Prudential</div>'
         f'</div>',
         unsafe_allow_html=True
     )
@@ -220,9 +232,7 @@ def main():
     # ── PAGE ROUTER ──
     page = st.session_state.page
     if page == "chat":
-        st.markdown('<div style="padding-top:24px;padding-bottom:100px;">', unsafe_allow_html=True)
         chat_page.render(AVATAR_B64)
-        st.markdown('</div>', unsafe_allow_html=True)
     elif page == "faq":
         faq_page.render()
     elif page == "insights":

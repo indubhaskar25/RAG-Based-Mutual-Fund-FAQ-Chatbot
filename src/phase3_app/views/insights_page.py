@@ -1,147 +1,141 @@
 """
-Fund Insights Page — Dashboard-style analytics section.
+Fund Insights Page — Dashboard-style analytics.
 """
 import streamlit as st
 import os
+import pandas as pd
+from datetime import datetime
 
-
-FUND_DATA = [
-    {"name": "Silver ETF FoF", "category": "Commodity", "risk": "High", "type": "Open-Ended"},
-    {"name": "Large Cap Fund", "category": "Large Cap", "risk": "Moderate", "type": "Open-Ended"},
-    {"name": "Dynamic Plan", "category": "Dynamic Asset", "risk": "Moderate", "type": "Open-Ended"},
-    {"name": "Top 100 Fund", "category": "Large Cap", "risk": "Moderate", "type": "Open-Ended"},
-    {"name": "Infrastructure Fund", "category": "Sectoral", "risk": "High", "type": "Open-Ended"},
-    {"name": "Commodities Fund", "category": "Commodity", "risk": "High", "type": "Open-Ended"},
-    {"name": "Balanced Fund", "category": "Hybrid", "risk": "Moderate", "type": "Open-Ended"},
-    {"name": "FlexiCap Fund", "category": "FlexiCap", "risk": "High", "type": "Open-Ended"},
-    {"name": "Retirement Pure Equity", "category": "Retirement", "risk": "High", "type": "Open-Ended"},
-    {"name": "Short Term Plan", "category": "Debt", "risk": "Low", "type": "Open-Ended"},
-    {"name": "Liquid Fund", "category": "Liquid", "risk": "Low", "type": "Open-Ended"},
-    {"name": "Indo Asia Equity Fund", "category": "International", "risk": "Very High", "type": "Open-Ended"},
-    {"name": "Nifty Index Fund", "category": "Index", "risk": "Moderate", "type": "Open-Ended"},
-    {"name": "MultiCap Fund", "category": "MultiCap", "risk": "High", "type": "Open-Ended"},
-    {"name": "Corporate Bond Fund", "category": "Debt", "risk": "Low", "type": "Open-Ended"},
-    {"name": "Nifty Midcap 150 Index", "category": "Index", "risk": "High", "type": "Open-Ended"},
-    {"name": "Dividend Yield Equity", "category": "Dividend Yield", "risk": "High", "type": "Open-Ended"},
-    {"name": "Aggressive Hybrid FoF", "category": "Hybrid", "risk": "High", "type": "Open-Ended"},
-    {"name": "Business Cycle Fund", "category": "Thematic", "risk": "Very High", "type": "Open-Ended"},
+FUNDS = [
+    {"name": "Silver ETF FoF", "cat": "Commodity", "risk": "High"},
+    {"name": "Large Cap Fund", "cat": "Large Cap", "risk": "Moderate"},
+    {"name": "Dynamic Plan", "cat": "Dynamic Asset", "risk": "Moderate"},
+    {"name": "Top 100 Fund", "cat": "Large Cap", "risk": "Moderate"},
+    {"name": "Infrastructure Fund", "cat": "Sectoral", "risk": "High"},
+    {"name": "Commodities Fund", "cat": "Commodity", "risk": "High"},
+    {"name": "Balanced Fund", "cat": "Hybrid", "risk": "Moderate"},
+    {"name": "FlexiCap Fund", "cat": "FlexiCap", "risk": "High"},
+    {"name": "Retirement Pure Equity", "cat": "Retirement", "risk": "High"},
+    {"name": "Short Term Plan", "cat": "Debt", "risk": "Low"},
+    {"name": "Liquid Fund", "cat": "Liquid", "risk": "Low"},
+    {"name": "Indo Asia Equity Fund", "cat": "International", "risk": "Very High"},
+    {"name": "Nifty Index Fund", "cat": "Index", "risk": "Moderate"},
+    {"name": "MultiCap Fund", "cat": "MultiCap", "risk": "High"},
+    {"name": "Corporate Bond Fund", "cat": "Debt", "risk": "Low"},
+    {"name": "Nifty Midcap 150 Index", "cat": "Index", "risk": "High"},
+    {"name": "Dividend Yield Equity", "cat": "Dividend Yield", "risk": "High"},
+    {"name": "Aggressive Hybrid FoF", "cat": "Hybrid", "risk": "High"},
+    {"name": "Business Cycle Fund", "cat": "Thematic", "risk": "Very High"},
 ]
 
-RISK_COLORS = {
-    "Low": "#22c55e",
-    "Moderate": "#eab308",
-    "High": "#f97316",
-    "Very High": "#ef4444",
-}
+RISK_CLR = {"Low": "#22c55e", "Moderate": "#eab308", "High": "#f97316", "Very High": "#ef4444"}
+
+
+def _card(icon, value, label):
+    return (
+        f'<div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);'
+        f'border-radius:12px;padding:18px;text-align:center;">'
+        f'<div style="font-size:1.3rem;margin-bottom:4px;">{icon}</div>'
+        f'<div style="font-size:1.3rem;font-weight:800;color:#e2e8f0;">{value}</div>'
+        f'<div style="font-size:0.62rem;color:#64748b;margin-top:3px;font-family:JetBrains Mono;'
+        f'text-transform:uppercase;letter-spacing:1px;">{label}</div></div>'
+    )
 
 
 def render():
     st.markdown(
-        '<div style="max-width:950px;margin:0 auto;padding:32px 24px;">'
-        '<h2 style="font-size:1.6rem;font-weight:800;'
-        'background:linear-gradient(135deg,#8b5cf6,#06b6d4);'
-        '-webkit-background-clip:text;-webkit-text-fill-color:transparent;'
-        'margin-bottom:4px;">Fund Insights</h2>'
-        '<p style="color:#64748b;font-size:0.9rem;margin-bottom:28px;">'
-        'Overview of indexed ICICI Prudential schemes and knowledge base statistics.</p>',
+        '<div style="max-width:900px;margin:0 auto;padding:28px 20px;">'
+        '<div style="font-size:1.4rem;font-weight:700;color:#e2e8f0;margin-bottom:2px;">'
+        '📊 Fund Insights</div>'
+        '<div style="color:#64748b;font-size:0.82rem;margin-bottom:24px;">'
+        'Knowledge base statistics and indexed scheme overview.</div>',
         unsafe_allow_html=True
     )
 
-    # Count scraped docs
     doc_count = 0
-    data_path = "data/raw_scraped"
-    if os.path.exists(data_path):
-        doc_count = len([f for f in os.listdir(data_path) if f.endswith(".txt")])
+    if os.path.exists("data/raw_scraped"):
+        doc_count = len([f for f in os.listdir("data/raw_scraped") if f.endswith(".txt")])
 
-    # Metric cards
+    # Metrics
     c1, c2, c3, c4 = st.columns(4)
-    metrics = [
-        (c1, "Indexed Schemes", str(len(FUND_DATA)), "📊"),
-        (c2, "Data Sources", str(doc_count), "📄"),
-        (c3, "Fund Categories", str(len(set(f["category"] for f in FUND_DATA))), "🏷️"),
-        (c4, "AMC", "ICICI Prudential", "🏦"),
-    ]
-    for col, label, val, icon in metrics:
-        with col:
-            st.markdown(
-                f'<div style="background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.07);'
-                f'border-radius:14px;padding:20px;text-align:center;">'
-                f'<div style="font-size:1.5rem;margin-bottom:6px;">{icon}</div>'
-                f'<div style="font-size:1.4rem;font-weight:800;color:#e2e8f0;">{val}</div>'
-                f'<div style="font-size:0.72rem;color:#64748b;margin-top:4px;'
-                f'font-family:JetBrains Mono;text-transform:uppercase;letter-spacing:1px;">{label}</div>'
-                f'</div>',
-                unsafe_allow_html=True
-            )
+    with c1:
+        st.markdown(_card("📊", str(len(FUNDS)), "Schemes"), unsafe_allow_html=True)
+    with c2:
+        st.markdown(_card("📄", str(doc_count), "Documents"), unsafe_allow_html=True)
+    with c3:
+        st.markdown(_card("🏷️", str(len(set(f["cat"] for f in FUNDS))), "Categories"), unsafe_allow_html=True)
+    with c4:
+        st.markdown(_card("🕐", datetime.now().strftime("%b %d"), "Last Sync"), unsafe_allow_html=True)
 
-    st.markdown('<div style="height:28px;"></div>', unsafe_allow_html=True)
+    st.markdown('<div style="height:20px;"></div>', unsafe_allow_html=True)
 
-    # Risk distribution chart
+    # Risk distribution
     st.markdown(
-        '<div style="font-size:0.75rem;font-family:JetBrains Mono;color:#8b5cf6;'
-        'text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;">Risk Distribution</div>',
+        '<div style="font-size:0.68rem;font-family:JetBrains Mono;color:#8b5cf6;'
+        'text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;">Risk Distribution</div>',
         unsafe_allow_html=True
     )
     risk_counts = {}
-    for f in FUND_DATA:
+    for f in FUNDS:
         risk_counts[f["risk"]] = risk_counts.get(f["risk"], 0) + 1
 
-    chart_cols = st.columns(len(risk_counts))
-    for idx, (risk, count) in enumerate(sorted(risk_counts.items(), key=lambda x: ["Low", "Moderate", "High", "Very High"].index(x[0]))):
-        with chart_cols[idx]:
-            color = RISK_COLORS.get(risk, "#8b5cf6")
-            pct = int(count / len(FUND_DATA) * 100)
+    order = ["Low", "Moderate", "High", "Very High"]
+    cols = st.columns(len(risk_counts))
+    for idx, risk in enumerate(order):
+        if risk not in risk_counts:
+            continue
+        count = risk_counts[risk]
+        color = RISK_CLR.get(risk, "#8b5cf6")
+        pct = int(count / len(FUNDS) * 100)
+        with cols[idx]:
             st.markdown(
-                f'<div style="background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.07);'
-                f'border-radius:12px;padding:16px;text-align:center;">'
-                f'<div style="font-size:1.3rem;font-weight:800;color:{color};">{count}</div>'
-                f'<div style="font-size:0.78rem;color:#94a3b8;margin-top:2px;">{risk} Risk</div>'
-                f'<div style="height:4px;background:rgba(255,255,255,0.05);border-radius:2px;margin-top:10px;">'
-                f'<div style="height:4px;width:{pct}%;background:{color};border-radius:2px;"></div>'
-                f'</div>'
-                f'</div>',
+                f'<div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);'
+                f'border-radius:10px;padding:14px;text-align:center;">'
+                f'<div style="font-size:1.2rem;font-weight:800;color:{color};">{count}</div>'
+                f'<div style="font-size:0.72rem;color:#94a3b8;margin-top:2px;">{risk}</div>'
+                f'<div style="height:3px;background:rgba(255,255,255,0.04);border-radius:2px;margin-top:8px;">'
+                f'<div style="height:3px;width:{pct}%;background:{color};border-radius:2px;"></div>'
+                f'</div></div>',
                 unsafe_allow_html=True
             )
 
-    st.markdown('<div style="height:28px;"></div>', unsafe_allow_html=True)
+    st.markdown('<div style="height:20px;"></div>', unsafe_allow_html=True)
 
-    # Category pie chart
+    # Category chart
     st.markdown(
-        '<div style="font-size:0.75rem;font-family:JetBrains Mono;color:#8b5cf6;'
-        'text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;">Category Breakdown</div>',
+        '<div style="font-size:0.68rem;font-family:JetBrains Mono;color:#8b5cf6;'
+        'text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;">Category Breakdown</div>',
         unsafe_allow_html=True
     )
-    import pandas as pd
     cat_counts = {}
-    for f in FUND_DATA:
-        cat_counts[f["category"]] = cat_counts.get(f["category"], 0) + 1
+    for f in FUNDS:
+        cat_counts[f["cat"]] = cat_counts.get(f["cat"], 0) + 1
     df = pd.DataFrame(list(cat_counts.items()), columns=["Category", "Count"])
     st.bar_chart(df.set_index("Category"), color="#8b5cf6")
 
-    st.markdown('<div style="height:28px;"></div>', unsafe_allow_html=True)
+    st.markdown('<div style="height:20px;"></div>', unsafe_allow_html=True)
 
-    # Scheme cards grid
+    # Scheme cards
     st.markdown(
-        '<div style="font-size:0.75rem;font-family:JetBrains Mono;color:#8b5cf6;'
-        'text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;">Indexed Schemes</div>',
+        '<div style="font-size:0.68rem;font-family:JetBrains Mono;color:#8b5cf6;'
+        'text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;">Indexed Schemes</div>',
         unsafe_allow_html=True
     )
-
     cols = st.columns(3)
-    for i, fund in enumerate(FUND_DATA):
-        color = RISK_COLORS.get(fund["risk"], "#8b5cf6")
+    for i, fund in enumerate(FUNDS):
+        color = RISK_CLR.get(fund["risk"], "#8b5cf6")
         with cols[i % 3]:
             st.markdown(
-                f'<div style="background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.07);'
-                f'border-radius:12px;padding:16px;margin-bottom:12px;">'
-                f'<div style="font-size:0.92rem;font-weight:700;color:#e2e8f0;margin-bottom:6px;">'
+                f'<div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);'
+                f'border-radius:10px;padding:12px 14px;margin-bottom:8px;">'
+                f'<div style="font-size:0.85rem;font-weight:600;color:#e2e8f0;margin-bottom:5px;">'
                 f'ICICI Pru {fund["name"]}</div>'
-                f'<div style="display:flex;gap:6px;flex-wrap:wrap;">'
-                f'<span style="background:rgba(139,92,246,0.12);color:#c4b5fd;padding:3px 8px;'
-                f'border-radius:6px;font-size:0.68rem;">{fund["category"]}</span>'
-                f'<span style="background:rgba({",".join(str(int(color.lstrip("#")[j:j+2],16)) for j in (0,2,4))},0.15);'
-                f'color:{color};padding:3px 8px;border-radius:6px;font-size:0.68rem;">'
-                f'{fund["risk"]} Risk</span>'
+                f'<div style="display:flex;gap:5px;flex-wrap:wrap;">'
+                f'<span style="background:rgba(139,92,246,0.1);color:#a78bfa;padding:2px 7px;'
+                f'border-radius:4px;font-size:0.62rem;">{fund["cat"]}</span>'
+                f'<span style="color:{color};font-size:0.62rem;padding:2px 7px;'
+                f'border-radius:4px;background:rgba(255,255,255,0.03);">'
+                f'{fund["risk"]}</span>'
                 f'</div></div>',
                 unsafe_allow_html=True
             )
